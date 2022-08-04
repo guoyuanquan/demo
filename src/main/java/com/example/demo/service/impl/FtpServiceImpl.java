@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 
 @Slf4j
-@Service
+//@Service
 public class FtpServiceImpl implements FtpService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -76,7 +76,7 @@ public class FtpServiceImpl implements FtpService {
             connectFtpServer();
         }
         try{
-//            OutputStream outputStream = new FileOutputStream(ftpFilePath);
+//        【    OutputStream outputStream = new FileOutputStream(ftpFilePath);
             FTPFile[] listFiles =ftp.listFiles();
             if (listFiles.length>0){
                 for (int i=0;i<listFiles.length;i++){

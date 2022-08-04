@@ -30,6 +30,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -52,7 +53,7 @@ public class StaticConsumer {
     @PostConstruct
     public void receiveDynamic() {
         Properties consumerProperties = new Properties();
-        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, "GID_sg_mq_taiji_stg_universe_ais_gj_jt");
+        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, "GID_stg_universe_ais_gj_dt");
         consumerProperties.setProperty(PropertyKeyConst.AccessKey, "6f181321efd9449ba45d2c69796b17f5");
         consumerProperties.setProperty(PropertyKeyConst.SecretKey, "OopH5XhRhlZfCg/O7iFaWotHkLQ=");
         consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, "http://mq.namesrv.paas.sgpt.gov:9876");
@@ -62,20 +63,14 @@ public class StaticConsumer {
         //广播方式订阅
 //        consumerProperties.put(PropertyKeyConst.MessageModel, PropertyValueConst.BROADCASTING);
         Consumer consumer = ONSFactory.createConsumer(consumerProperties);
-        consumer.subscribe("zdk2", "stg_universe_ais_gj_jt", new MessageListener(){
+        consumer.subscribe("zdk2", "stg_universe_ais_gj_dt", new MessageListener(){
 
             @Override
             public Action consume(Message message, ConsumeContext consumeContext) {
                 String text = new String(message.getBody());
                 Map<String,String> map = JSONObject.parseObject(text,Map.class);
-                String userId = map.get("userid");
-                String result = redisTemplate.opsForValue().get(userId);
-                if (StringUtils.hasLength(result)){
-                    sameNum++;
-                }
-                count++;
-                log.info("总数："+count);
-                log.info("匹配数:"+sameNum);
+                String receiveTime = map.get("receive_time");
+                addInfo(receiveTime);
                 return Action.CommitMessage;
             }
         });
@@ -83,19 +78,15 @@ public class StaticConsumer {
         System.out.println("Static Consumer start success.");
     }
 
-    public void addInfo(String text) {
+
+    public void addInfo(String receiveTime) {
         try {
-            final String now = DateUtil.format(new Date(), "yyyy-MM-ddHH:mm:sss");
-            DynamicReceive dynamicReceive =new DynamicReceive();
-            dynamicReceive= JSON.parseObject(text,DynamicReceive.class);
-            Set<CityInfo> cityInfos = new HashSet<CityInfo>();
-            CityInfo cityInfo1 =new CityInfo();
-            cityInfo1.setCityName(text);
-            cityInfo1.setLatitude(dynamicReceive.getLatitude());
-            cityInfo1.setLongitude(dynamicReceive.getLongitude());
-            cityInfos.add(cityInfo1);
-//            geoService.saveCityInfoToRedis(cityInfos);
-            redisService.setRedis(text,now);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date date=sdf.parse(receiveTime);
+            Date currentTime = new Date();
+            System.out.println(receiveTime);
+            System.out.println(sdf.format(currentTime));
+            System.out.println((currentTime.getTime()-date.getTime()));
         }catch (Exception e){
             e.printStackTrace();
         }

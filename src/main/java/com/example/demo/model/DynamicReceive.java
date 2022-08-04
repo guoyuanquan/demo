@@ -1,28 +1,32 @@
 package com.example.demo.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
+@TableName("stg_universe_ais_gj_dt")
 public class DynamicReceive {
     private String userid;
 
     private String receive_time;
 
-    private int messageid;
+    private String messageid;
 
     private String nav_status;
 
-    private double rot;
+    private String rot;
 
-    private double sog;
+    private String sog;
 
-    private double longitude;
+    private String longitude;
 
-    private double latitude;
+    private String latitude;
 
-    private double cog;
+    private String cog;
 
-    private double true_heading;
+    private String true_heading;
 
-    private int dsource;
+    private String dsource;
+
+    private String uuid;
 }

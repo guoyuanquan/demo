@@ -10,6 +10,16 @@ spring:
       max-idle: 8
       max-active: 8
       max-wait: -1ms
+  datasource:
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://59.212.129.32:3000/radar?rewriteBatchedStatements=true&autoReconnect=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+      username: root
+      password: Taiji@2021
+      validation-query: SELECT 1
+      # 连接池大小根据实际情况调整
+      max-active: 20
+      max-pool-prepared-statement-per-connection-size: 20
   kafka:
     bootstrap-servers: kafka67:9094,kafka68:9094,kafka69:9094,kafka70:9094,kafka71:9094
     #bootstrap-servers: localhost:9092
@@ -81,3 +91,6 @@ ftp:
   download:
     filename: \
     filepath: \
+
+bj:
+  num: 5000000
