@@ -27,7 +27,7 @@ public class FtpController {
 
     void uploadFile() throws IOException {
         File file = new File(uploadFilePath);
-        InputStream inputStream = new FileInputStream(file);
+            InputStream inputStream = new FileInputStream(file);
         ftpService.uploadFile(inputStream,uploadFileName,uploadFilePath);
     }
 

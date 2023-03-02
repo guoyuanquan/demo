@@ -17,20 +17,16 @@ package com.example.demo.controller;
 
 
 import com.aliyun.openservices.ons.api.*;
-import com.aliyun.openservices.shade.com.alibaba.fastjson.JSON;
 import com.aliyun.openservices.shade.com.alibaba.fastjson.JSONObject;
-import com.example.demo.model.CityInfo;
-import com.example.demo.model.DynamicReceive;
+
+import com.example.demo.model.FusionRadar;
 import com.example.demo.service.IDynamicService;
-import com.example.demo.service.IGeoService;
-import com.example.demo.service.IRedisService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import cn.hutool.core.date.DateUtil;
@@ -39,7 +35,7 @@ import cn.hutool.core.date.DateUtil;
  * MQ 接收消息示例 Demo
  */
 @Slf4j
-@Component
+//@Component
 public class DynamicConsumer {
 
 //    @Autowired
@@ -49,44 +45,33 @@ public class DynamicConsumer {
     @Resource
     private IDynamicService dynamicService;
 
-    @Value("${bj.num}")
-    private Integer i;
+    private SimpleDateFormat pdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-
-//    @PostConstruct
+    @PostConstruct
     public void receiveDynamic() {
         Properties consumerProperties = new Properties();
-        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, "GID_stg_universe_ais_gj_jt");
+        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, "GID_taiji_ax_stg_jmrhb_cetcocean_target_hlxais_dt_df");
         consumerProperties.setProperty(PropertyKeyConst.AccessKey, "6f181321efd9449ba45d2c69796b17f5");
         consumerProperties.setProperty(PropertyKeyConst.SecretKey, "OopH5XhRhlZfCg/O7iFaWotHkLQ=");
         consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, "http://mq.namesrv.paas.sgpt.gov:9876");
         consumerProperties.setProperty(PropertyKeyConst.InstanceName, "sgpt_sgzyc");
         //集群方式订阅
 //        consumerProperties.put(PropertyKeyConst.MessageModel,PropertyValueConst.CLUSTERING);
-        //广播方式订阅
-//        consumerProperties.put(PropertyKeyConst.MessageModel, PropertyValueConst.BROADCASTING);
         Consumer consumer = ONSFactory.createConsumer(consumerProperties);
-        consumer.subscribe("zdk2", "stg_universe_ais_gj_jt", new MessageListener(){
+        consumer.subscribe("taiji_ax_tianao_radar_fusion", "tianao_radar_fusion", new MessageListener(){
 
             @Override
             public Action consume(Message message, ConsumeContext consumeContext) {
-                String text = new String(message.getBody());
-//                log.info("text:"+text);
-                if (i>0){
-                    dynamicService.save(text);
-                    i--;
-                    log.info("剩余："+i);
+                FusionRadar fusionRadar=JSONObject.parseObject(message.getBody(),FusionRadar.class);
+                Date receviveTime =fusionRadar.getReceiveTime();
+                try {
+                    Date nowDate =new Date();
+//                    log.info("时间:"+receviveTime);
+//                    log.info("时间1:"+nowDate);
+                    log.info("时间差:"+(nowDate.getTime()-receviveTime.getTime())/1000.0);
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
-
-//                Map<String,String> map = JSONObject.parseObject(text,Map.class);
-//                String userId = map.get("userid");
-//                if (userId.equals("413376420")){
-//                    log.info("当前时间："+DateUtil.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-//                    log.info(text);
-////                    final String now = DateUtil.format(new Date(), "yyyy-MM-ddHH:mm:sss");
-//                    redisService.setRedis(userId,userId);
-//                }
-//                addInfo(text);
 
                 return Action.CommitMessage;
             }
@@ -94,26 +79,5 @@ public class DynamicConsumer {
         consumer.start();
         System.out.println("Dynamic Consumer start success.");
     }
-
-//    public void addInfo(String text) {
-//        try {
-//            final String now = DateUtil.format(new Date(), "yyyy-MM-ddHH:mm:sss");
-//            DynamicReceive dynamicReceive =new DynamicReceive();
-//            dynamicReceive= JSON.parseObject(text,DynamicReceive.class);
-//            Set<CityInfo> cityInfos = new HashSet<CityInfo>();
-//            CityInfo cityInfo1 =new CityInfo();
-//            cityInfo1.setCityName(text);
-//            cityInfo1.setLatitude(dynamicReceive.getLatitude());
-//            cityInfo1.setLongitude(dynamicReceive.getLongitude());
-//            cityInfos.add(cityInfo1);
-////            geoService.saveCityInfoToRedis(cityInfos);
-//            redisService.setRedis(text,now);
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
-
-//    }
-
-
 
 }

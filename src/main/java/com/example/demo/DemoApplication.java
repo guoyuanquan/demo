@@ -11,7 +11,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
-@Slf4j
+//@Slf4j
 @EnableScheduling
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableAsync

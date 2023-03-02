@@ -50,10 +50,10 @@ public class StaticConsumer {
     protected int count=0;
     protected int sameNum=0;
 
-    @PostConstruct
-    public void receiveDynamic() {
+//    @PostConstruct
+    public static void main(String args[]) {
         Properties consumerProperties = new Properties();
-        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, "GID_stg_universe_ais_gj_dt");
+        consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, "GID_taiji_fukan");
         consumerProperties.setProperty(PropertyKeyConst.AccessKey, "6f181321efd9449ba45d2c69796b17f5");
         consumerProperties.setProperty(PropertyKeyConst.SecretKey, "OopH5XhRhlZfCg/O7iFaWotHkLQ=");
         consumerProperties.setProperty(PropertyKeyConst.NAMESRV_ADDR, "http://mq.namesrv.paas.sgpt.gov:9876");
@@ -68,9 +68,10 @@ public class StaticConsumer {
             @Override
             public Action consume(Message message, ConsumeContext consumeContext) {
                 String text = new String(message.getBody());
-                Map<String,String> map = JSONObject.parseObject(text,Map.class);
-                String receiveTime = map.get("receive_time");
-                addInfo(receiveTime);
+                log.info("接收数据："+text);
+//                Map<String,String> map = JSONObject.parseObject(text,Map.class);
+//                String receiveTime = map.get("receive_time");
+//                addInfo(receiveTime);
                 return Action.CommitMessage;
             }
         });
@@ -79,19 +80,19 @@ public class StaticConsumer {
     }
 
 
-    public void addInfo(String receiveTime) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date date=sdf.parse(receiveTime);
-            Date currentTime = new Date();
-            System.out.println(receiveTime);
-            System.out.println(sdf.format(currentTime));
-            System.out.println((currentTime.getTime()-date.getTime()));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
+//    public void addInfo(String receiveTime) {
+//        try {
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//            Date date=sdf.parse(receiveTime);
+//            Date currentTime = new Date();
+//            System.out.println(receiveTime);
+//            System.out.println(sdf.format(currentTime));
+//            System.out.println((currentTime.getTime()-date.getTime()));
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
 
 
 

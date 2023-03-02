@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
-//@Component
+@Component
 @Slf4j
 public class KafkaConsumer {
 
@@ -26,18 +26,9 @@ public class KafkaConsumer {
             groupId = "${taiji.kafka.consumer.tianao_original.group}")
     public void shipWarningRecord(ConsumerRecord<?, ?> record, Acknowledgment ack, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic) throws ParseException {
         Optional message = Optional.ofNullable(record.value());
-        Long diffTime =0L ;
-        Date oldTime = new Date();
         if (message.isPresent()) {
             Object msg = message.get();
-//            log.info("数据："+msg);
-            Map<String,Object> map = JSONObject.parseObject(msg.toString(),Map.class);
-            int radarId = Integer.parseInt(map.get("radarCode").toString());
-            if (radarId==10023){
-                Date newTime = new Date();
-                diffTime = newTime.getTime()-oldTime.getTime();
-                log.info("相差时间"+diffTime);
-            }
+            log.info("数据："+msg);
             ack.acknowledge();
         }
         ack.acknowledge();
