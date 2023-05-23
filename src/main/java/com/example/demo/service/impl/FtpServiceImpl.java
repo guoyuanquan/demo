@@ -1,9 +1,6 @@
 package com.example.demo.service.impl;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 import com.aliyun.openservices.shade.org.apache.commons.lang3.StringUtils;
 import com.example.demo.service.FtpService;
@@ -19,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 @Slf4j
-//@Service
+@Service
 public class FtpServiceImpl implements FtpService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -71,23 +68,24 @@ public class FtpServiceImpl implements FtpService {
     }
 
     @Override
-    public void downloadFileTo(String ftpFilePath) {
+    public void downloadFileTo(String ftpFilePath,String filename,String loacalpath) {
         if (ftp == null){
             connectFtpServer();
         }
         try{
-//        【    OutputStream outputStream = new FileOutputStream(ftpFilePath);
-            FTPFile[] listFiles =ftp.listFiles();
-            if (listFiles.length>0){
-                for (int i=0;i<listFiles.length;i++){
-                    String filename = listFiles[i].getName();
-                    log.info("文件名："+filename);
-                }
-            }
-//            ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
-//            ftp.enterLocalPassiveMode();
-//            ftp.retrieveFile(ftpFilePath, out);
-//            ftp.logout();
+            File loacalFile = new File(loacalpath+filename);
+            OutputStream outputStream = new FileOutputStream(loacalFile);
+//            FTPFile[] listFiles =ftp.listFiles();
+//            if (listFiles.length>0){
+//                for (int i=0;i<listFiles.length;i++){
+//                    String filename = listFiles[i].getName();
+//                    log.info("文件名："+filename);
+//                }
+//            }
+            ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
+            ftp.enterLocalPassiveMode();
+            ftp.retrieveFile(ftpFilePath+filename, outputStream);
+            ftp.logout();
 
         } catch (Exception e) {
             logger.error("FTP文件下载失败！" + e.toString());

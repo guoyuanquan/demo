@@ -1,9 +1,10 @@
-package com.example.demo.controller;
+package com.example.demo.controller.ftp;
 
 import com.example.demo.service.FtpService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -21,6 +22,8 @@ public class FtpController {
     private String downloadFilePath;
     @Value("${ftp.download.filename}")
     private String downloadFileName;
+    @Value("${ftp.download.localpath}")
+    private String localpath;
 
     @Autowired
     private FtpService ftpService;
@@ -31,8 +34,8 @@ public class FtpController {
         ftpService.uploadFile(inputStream,uploadFileName,uploadFilePath);
     }
 
-    @PostConstruct
+//    @Scheduled(initialDelay = 5000,fixedDelay = 60*1000*60)
     void downloadFile(){
-        ftpService.downloadFileTo(downloadFilePath);
+        ftpService.downloadFileTo(downloadFilePath,downloadFileName,localpath);
     }
 }

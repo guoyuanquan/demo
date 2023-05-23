@@ -21,7 +21,7 @@ spring:
       max-active: 20
       max-pool-prepared-statement-per-connection-size: 20
   kafka:
-#    bootstrap-servers: 192.168.196.241:9092
+#    bootstrap-servers: 192.168.196.241:29092
     bootstrap-servers: 59.212.129.32:9092
     #bootstrap-servers: localhost:9092
     producer:
@@ -56,7 +56,7 @@ spring:
       sasl:
         mechanism: SCRAM-SHA-512
         jaas:
-          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="producer_kafka" password="producer_kafka";'
+          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="ax_hlx" password="ax_hlx";'
     listener:
       # 在侦听器容器中运行的线程数。
       concurrency: 5
@@ -64,16 +64,16 @@ spring:
       ack-mode: manual_immediate
       missing-topics-fatal: false
 logging:
-  basePath: /home/project/demo/logs
-  config: classpath:log-config/logback-spring.xml
+#  basePath: /home/project/demo/logs
+#  config: classpath:log-config/logback-spring.xml
   level:
     root: info
     cn.com.taiji: info
 taiji:
   kafka.consumer:
     tianao_original:
-      topic: 'taiji_ax_tianao_radar_fusion'
-      group: 'group'
+      topic: 'hlx_ax_original_ais'
+      group: '202003070914'
     count_topic:
       topic: 'topic'
       group: 'group'
@@ -84,16 +84,27 @@ file:
   targetPath:  /app/vsftpd/zww-gaw-bianjie/bianjie/test/
 
 ftp:
-  host: 59.212.129.31
-  username: temporary
-  password: Taiji@2021
-  port: 21
+  host: 10.184.14.137
+  username: hazd_ztry
+  password: HAZD@Ztry
+  port: 10021
   upload:
     filename: \
     filepath: \
   download:
-    filename: \
+    filename: \20230410_ZP.zip
     filepath: \
+    localpath: d:\gyq\
 
 bj:
   num: 5000000
+
+wrj:
+  filePath: /app/wrj/ydyp/海关
+#  filePath: C:\haiguan
+es:
+  hosts: 74.10.28.65:9201,74.10.28.66:9200,74.10.28.66:9201,74.10.28.66:9202,74.10.28.67:9200,74.10.28.67:9201,74.10.28.67:9202,74.10.28.68:9200,74.10.28.68:9201,74.10.28.68:9202,74.10.28.69:9200,74.10.28.69:9201,74.10.28.69:9202
+  username: ax_seat
+  password: ax_seat
+  connectTimeout: 100
+  maxConnection: 100

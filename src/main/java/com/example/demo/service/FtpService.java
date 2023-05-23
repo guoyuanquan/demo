@@ -7,7 +7,7 @@ public interface FtpService {
 
     Boolean uploadFile(InputStream inputStream, String fileName, String filePath);
 
-    void downloadFileTo(String ftpFilePath);
+    void downloadFileTo(String ftpFilePath,String filename,String localpath);
 
     Boolean deleteFile(String ftpFilePath);
 }

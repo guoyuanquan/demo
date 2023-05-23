@@ -30,14 +30,14 @@ public class WsController {
     WebSocketClient client = null;
 
 
-    @Scheduled(initialDelay = 1 * 1000, fixedRate = 3 * 1000)
-//    @PostConstruct
+//    @Scheduled(initialDelay = 1 * 1000, fixedRate = 3 * 1000)
+    @PostConstruct
     public void initClient(){
         try {
             if (client == null) {
 
 
-                String uri = "ws://172.22.24.20:11081" ;
+                String uri = "ws://10.112.89.96:9016/?token=UHNhcp25P2LzN3nMjGP2LRIS" ;
 
                 client = new WebSocketClient(new URI(uri)) {
 

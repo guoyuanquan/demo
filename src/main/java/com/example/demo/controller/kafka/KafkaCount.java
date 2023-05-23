@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.kafka;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.model.RadarData;

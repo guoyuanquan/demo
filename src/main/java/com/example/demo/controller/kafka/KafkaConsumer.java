@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.controller.kafka;
 
 
 import com.alibaba.fastjson.JSONObject;
@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
-@Component
+//@Component
 @Slf4j
 public class KafkaConsumer {
 
