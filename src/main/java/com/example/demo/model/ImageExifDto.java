@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class ImageExifDto {
-    private Double longitude;
+    private double longitude;
 
-    private Double latitude;
+    private double latitude;
 
-    private Double altitude;
+    private double altitude;
 
     private String dateTime;
 
@@ -17,4 +17,6 @@ public class ImageExifDto {
     private String absolutePath;
 
     private String fileName;
+
+    private String location;
 }

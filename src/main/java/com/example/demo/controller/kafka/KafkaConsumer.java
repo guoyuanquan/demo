@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 
-//@Component
+@Component
 @Slf4j
 public class KafkaConsumer {
 

@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 import java.io.File;
 
 @Slf4j
-@Component
+//@Component
 public class FileList {
 
     @Value("${wrj.filePath}")
@@ -19,7 +19,7 @@ public class FileList {
     @Resource
     private ImageController imageController;
 
-    @PostConstruct
+//    @PostConstruct
     public void  getFile()throws Exception{
         File file = new File(filePath);
         listAll(file);
@@ -29,6 +29,7 @@ public class FileList {
         File[] files =dir.listFiles();
         for (int x=0;x<files.length;x++){
             if (files[x].isDirectory()){
+                log.info(files[x].getAbsolutePath());
                 listAll(files[x]);
             }
             else if (files[x].getName().endsWith(".JPG")){
