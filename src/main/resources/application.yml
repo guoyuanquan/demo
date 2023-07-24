@@ -4,5 +4,5 @@ spring:
   application.name: ax-data-recieve-tianao-radar
   main.web-application-type: none
   profiles:
-    active: prod
+    active: local
 
