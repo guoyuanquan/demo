@@ -19,4 +19,6 @@ public class ImageExifDto {
     private String fileName;
 
     private String location;
+
+    private String deptArea;
 }

@@ -47,7 +47,7 @@ public class DynamicConsumer {
 
     private SimpleDateFormat pdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    @PostConstruct
+//    @PostConstruct
     public void receiveDynamic() {
         Properties consumerProperties = new Properties();
         consumerProperties.setProperty(PropertyKeyConst.GROUP_ID, "GID_taiji_ax_stg_jmrhb_cetcocean_target_hlxais_dt_df");

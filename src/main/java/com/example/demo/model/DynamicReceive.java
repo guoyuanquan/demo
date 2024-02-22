@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("stg_universe_ais_gj_dt")
+//@TableName("stg_universe_ais_gj_dt")
 public class DynamicReceive {
     private String userid;
 

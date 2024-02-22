@@ -21,8 +21,8 @@ spring:
       max-active: 20
       max-pool-prepared-statement-per-connection-size: 20
   kafka:
-#    bootstrap-servers: 192.168.196.241:29092
-    bootstrap-servers: 59.212.129.32:9092
+    bootstrap-servers: 218.77.183.103:19092
+#    bootstrap-servers: 59.212.129.32:9092
     #bootstrap-servers: localhost:9092
     producer:
       # 发生错误后，消息重发的次数。
@@ -56,7 +56,7 @@ spring:
       sasl:
         mechanism: SCRAM-SHA-512
         jaas:
-          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="ztpt_consumer" password="Taiji@2023#ztpt";'
+          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="ax_yhl" password="ax_yhl";'
     listener:
       # 在侦听器容器中运行的线程数。
       concurrency: 5

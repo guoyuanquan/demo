@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 @Slf4j
-@Service
+//@Service
 public class FtpServiceImpl implements FtpService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 

@@ -31,7 +31,7 @@ public class WsController {
 
 
 //    @Scheduled(initialDelay = 1 * 1000, fixedRate = 3 * 1000)
-    @PostConstruct
+//    @PostConstruct
     public void initClient(){
         try {
             if (client == null) {

@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.UUID;
 
 @Slf4j
-@Service
+//@Service
 public class DynamicServiceImpl extends ServiceImpl<DynamicMapper, DynamicReceive> implements IDynamicService  {
 
     @Resource

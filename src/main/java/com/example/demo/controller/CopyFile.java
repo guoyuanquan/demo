@@ -30,7 +30,7 @@ public class CopyFile {
 
     private SimpleDateFormat sFormat=new SimpleDateFormat("yyyy-MM-dd HH.mm.ss.SSS");
 
-    @PostConstruct
+//    @PostConstruct
     public  void copyFile() throws IOException {
         for (int i=0;i<num;i++){
 

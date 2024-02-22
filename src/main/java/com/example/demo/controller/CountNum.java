@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 
 @Slf4j
-@Component
+//@Component
 public class CountNum {
-    @PostConstruct
+//    @PostConstruct
     public void count(){
         int i=100;
         int num=0;

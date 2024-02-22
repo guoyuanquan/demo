@@ -15,7 +15,7 @@ import java.io.File;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-//@Component
+@Component
 public class ImageController {
 
     @Resource
@@ -33,11 +33,17 @@ public class ImageController {
             if ( imageExifDto.getLongitude()>0){
                 imageExifDto.setLocation("POINT("+imageExifDto.getLongitude()+" "+imageExifDto.getLatitude()+")");
             }
+            if (absolutePath.contains("片区")){
+                String[] jj= absolutePath.split("/");
+                imageExifDto.setDeptArea(jj[4]);
+            }else {
+                imageExifDto.setDeptArea("未知");
+            }
 
             String url = absolutePath.replace("/app/wrj/ydyp/","74.10.28.82:8888/images/");
             imageExifDto.setUrl(url);
             System.out.println(imageExifDto);
-//            esUtils.save(imageExifDto);
+            esUtils.save(imageExifDto);
         }
     }
 

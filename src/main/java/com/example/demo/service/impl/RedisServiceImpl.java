@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
 
-@Service
+//@Service
 public class RedisServiceImpl implements IRedisService {
 
     @Autowired
