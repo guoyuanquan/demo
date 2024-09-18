@@ -19,7 +19,7 @@ public class FileList {
     @Resource
     private ImageController imageController;
 
-    @PostConstruct
+//    @PostConstruct
     public void  getFile()throws Exception{
         File file = new File(filePath);
         listAll(file);

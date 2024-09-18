@@ -63,7 +63,7 @@ public class Posts {
 
 
 
-        @PostConstruct
+//        @PostConstruct
         public void sendPost(){
         String id="1534431269301735426";
         String url="http://74.10.28.62:81/seat-resource/seat/file/resource/ycm/cbzp/2E74GKKHYOKEI1JXP4BB8D3RD.jpg";

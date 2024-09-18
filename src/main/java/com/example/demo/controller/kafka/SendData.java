@@ -18,7 +18,7 @@ public class SendData {
     @Resource
     private Kafkaroducer kafkaProducer;
 
-    @PostConstruct
+//    @PostConstruct
     public void send(){
         String topic ="taiji_ax_bak_one";
         String key="1";
