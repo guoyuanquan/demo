@@ -1,4 +1,4 @@
-package com.example.demo.controller.separate;
+package com.example.demo.controller.sperate;
 
 /**
  * @Author：guoyq
