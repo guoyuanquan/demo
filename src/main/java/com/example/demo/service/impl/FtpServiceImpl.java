@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 @Slf4j
-//@Service
+@Service
 public class FtpServiceImpl implements FtpService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -26,6 +26,8 @@ public class FtpServiceImpl implements FtpService {
     private String username;
     @Value("${ftp.password}")
     private String password;
+    @Value("${ftp.port}")
+    private int port;
 
     FTPClient ftp = connectFtpServer();
 
@@ -35,10 +37,8 @@ public class FtpServiceImpl implements FtpService {
         // 定义保存结果
         boolean iaOk = false;
         // 初始化连接
-        if (ftp == null){
+        if (ftp == null) {
             connectFtpServer();
-        }
-        if (ftp != null) {
             try {
                 // 设置文件传输模式为二进制，可以保证传输的内容不会被改变
                 ftp.setFileType(FTP.BINARY_FILE_TYPE);
@@ -138,7 +138,7 @@ public class FtpServiceImpl implements FtpService {
             // 定义返回的状态码
             int replyCode;
             // 连接ftp(当前项目所部署的服务器和ftp服务器之间可以相互通讯，表示连接成功)
-            ftpClient.connect(host);
+            ftpClient.connect(host,port);
             // 输入账号和密码进行登录
             ftpClient.login(username, password);
             // 接受状态码(如果成功，返回230，如果失败返回503)

@@ -20,7 +20,7 @@ import java.io.*;
 public class FileChange {
 
 //    接口获取二进制文件流，转成图片保存
-    @PostConstruct
+//    @PostConstruct
     public void downFile() throws Exception {
         FileChange fileChange= new FileChange();
         String url="http://74.10.28.118:1808/api-bj/shipping_converge/CBSJCX/CXTPXX/2c9180838d5974ac018dcfacf24c382b";

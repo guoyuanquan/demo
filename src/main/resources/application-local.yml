@@ -1,4 +1,10 @@
 spring:
+  neo4j:
+    uri: bolt://192.168.220.221:7687
+    authentication:
+      username: neo4j
+      password: 12345678
+
   redis:
     host: 127.0.0.1
     port: 6379
@@ -24,21 +30,6 @@ spring:
     bootstrap-servers: 218.77.183.103:19092
 #    bootstrap-servers: 59.212.129.32:9092
     #bootstrap-servers: localhost:9092
-    producer:
-      # 发生错误后，消息重发的次数。
-      retries: 0
-      #当有多个消息需要被发送到同一个分区时，生产者会把它们放在同一个批次里。该参数指定了一个批次可以使用的内存大小，按照字节数计算。
-      batch-size: 16384
-      # 设置生产者内存缓冲区的大小。
-      buffer-memory: 33554432
-      # 键的序列化方式
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # 值的序列化方式
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      # acks=0 ： 生产者在成功写入消息之前不会等待任何来自服务器的响应。
-      # acks=1 ： 只要集群的首领节点收到消息，生产者就会收到一个来自服务器成功响应。
-      # acks=all ：只有当所有参与复制的节点全部收到消息时，生产者才会收到一个来自服务器的成功响应。
-      acks: 1
     consumer:
       # 自动提交的时间间隔 在spring boot 2.X 版本中这里采用的是值的类型为Duration 需要符合特定的格式，如1S,1M,2H,5D
       auto-commit-interval: 1S
@@ -56,7 +47,7 @@ spring:
       sasl:
         mechanism: SCRAM-SHA-512
         jaas:
-          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="ax_yhl" password="ax_yhl";'
+          config: 'org.apache.kafka.common.security.scram.ScramLoginModule required username="ztpt_consumer" password="ztpt_consumer";'
     listener:
       # 在侦听器容器中运行的线程数。
       concurrency: 5
@@ -72,7 +63,7 @@ logging:
 taiji:
   kafka.consumer:
     tianao_original:
-      topic: 'taiji_ax_tianao_radar_fusion'
+      topic: 'taiji_ax_all_dynamic_ais'
       group: '202003070914'
     count_topic:
       topic: 'topic'
@@ -84,13 +75,13 @@ file:
   targetPath:  /app/vsftpd/zww-gaw-bianjie/bianjie/test/
 
 ftp:
-  host: 10.184.14.137
-  username: hazd_ztry
-  password: HAZD@Ztry
-  port: 10021
+  host: 153.0.158.82
+  username: bianjie
+  password: dzhlw@gaxxw
+  port: 30001
   upload:
     filename: \
-    filepath: \
+    filepath: d://config.txt
   download:
     filename: \20230410_ZP.zip
     filepath: \

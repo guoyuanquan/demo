@@ -28,10 +28,11 @@ public class FtpController {
     @Autowired
     private FtpService ftpService;
 
+    @PostConstruct
     void uploadFile() throws IOException {
         File file = new File(uploadFilePath);
             InputStream inputStream = new FileInputStream(file);
-        ftpService.uploadFile(inputStream,uploadFileName,uploadFilePath);
+        ftpService.uploadFile(inputStream,"2","/test");
     }
 
 //    @Scheduled(initialDelay = 5000,fixedDelay = 60*1000*60)
